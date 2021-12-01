@@ -16,10 +16,10 @@ class CreateMensaje extends Migration
         Schema::create('mensajes', function (Blueprint $table) {
             $table->id();
             $table->string('email_origen');
-            $table->foreign('email_origen')->references('email')->on('personas')->nullOnDelete()->onUpdate('cascade');
+            $table->foreign('email_origen')->references('email')->on('personas')->onUpdate('cascade');
             $table->string('email_destino');
-            $table->foreign('email_destino')->references('email')->on('personas')->nullOnDelete()->onUpdate('cascade');
-            $table->string('texto');
+            $table->foreign('email_destino')->references('email')->on('personas')->onUpdate('cascade');
+            $table->string('texto',1000);
             $table->integer('leido');
             $table->timestamps();
         });
