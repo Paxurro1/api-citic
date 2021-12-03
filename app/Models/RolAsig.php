@@ -9,7 +9,7 @@ class RolAsig extends Model
 {
     use HasFactory;
 
-    protected $table = 'preferencia_personas';
+    protected $table = 'roles_asignados';
     protected $primaryKey = ['email', 'id_rol'];
     public $incrementing = false;
     protected $keyType = ['string', 'unsignedBigInteger'];
