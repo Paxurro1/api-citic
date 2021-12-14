@@ -14,4 +14,7 @@ class Mensaje extends Model
         'texto',
         'leido'
     ];
+    public function adjunto(){
+        return $this->hasMany(Adjunto::class, 'id','id');
+    }
 }
