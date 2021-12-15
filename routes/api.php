@@ -18,6 +18,8 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 */
 Route::group(['prefix' => 'user'], function () {
     Route::post('loging',[controladorUsuario::class,'loging']);
+    Route::post('registro',[controladorUsuario::class,'registro']);
+    Route::post('listaPref',[controladorUsuario::class,'listaPref']);
 });
 
 Route::group(['prefix' => 'admin'], function () {
