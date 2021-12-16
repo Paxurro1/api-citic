@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GustoGenero;
 use App\Models\Persona;
 use App\Models\Preferencia;
 use App\Models\PreferenciaPersona;
@@ -77,17 +78,11 @@ class controladorUsuario extends Controller
     public function listaPref(Request $req)
     {
         $email = $req->get('email');
-        $pass = $req->get('pass');
         $per = Persona::where([
             ['email', $email],
         ])->get();
+        $gustos = GustoGenero::where([
 
-        $ckPass = Hash::check($pass, Persona::where('email', $email)->get()[0]->pass);
-
-        if (count($per) > 0 && $ckPass) {
-            return response()->json($per, 200);
-        } else {
-            return response()->json(['mensaje' => 'error'], 403);
-        }
+        ]);
     }
 }
