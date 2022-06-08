@@ -535,7 +535,7 @@ class controladorUsuario extends Controller
             Amigo::where([['email1',  $email], ['email2',  $emailAmigo]])->delete();
             Amigo::where([['email1',  $emailAmigo], ['email2',  $email]])->delete();
             Like::where([['email_origen',  $email], ['email_destino',  $emailAmigo]])->delete();
-            return response()->json(['mensaje' => 'Le has dado like a este usuario.'], 200);
+            return response()->json(['mensaje' => 'Usuario borrado.'], 200);
         } catch (Exception $th) {
             return response()->json(['mensaje' => $th->getMessage()], 400);
         }
