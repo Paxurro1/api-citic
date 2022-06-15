@@ -46,4 +46,7 @@ Route::group(['middleware' => ['Cors']], function () {
     Route::get('establecerAmigos/{email}',[controladorUsuario::class,'establecerAmigos']);
     Route::get('getAmigos/{email}',[controladorUsuario::class,'getAmigos']);
     Route::get('borrarAmigo/{email}/{emailAmigo}',[controladorUsuario::class,'borrarAmigo']);
+    // Mensajes
+    Route::get('getMensajes/{email}/{emailMensaje}',[controladorUsuario::class,'getMensajes']);
+    Route::post('/enviarMensaje', [controladorUsuario::class, 'enviarMensaje']);
 });

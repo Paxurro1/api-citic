@@ -7,6 +7,7 @@ use App\Models\Amigo;
 use App\Models\Dislike;
 use App\Models\GustoGenero;
 use App\Models\Like;
+use App\Models\Mensaje;
 use App\Models\Persona;
 use App\Models\Preferencia;
 use App\Models\PreferenciaPersona;
@@ -536,6 +537,37 @@ class controladorUsuario extends Controller
             Amigo::where([['email1',  $emailAmigo], ['email2',  $email]])->delete();
             Like::where([['email_origen',  $email], ['email_destino',  $emailAmigo]])->delete();
             return response()->json(['mensaje' => 'Usuario borrado.'], 200);
+        } catch (Exception $th) {
+            return response()->json(['mensaje' => $th->getMessage()], 400);
+        }
+        // error_log($usuarios);
+    }
+
+    public function getMensajes(string $email, string $emailMensaje)
+    {
+        try {
+            $mensajes = Mensaje::where([['email_origen',  $emailMensaje], ['email_destino',  $email]])
+                ->select(['email_origen', 'email_destino', 'texto', 'leido'])
+                ->get();
+            // error_log($mensajes);
+            return response()->json($mensajes, 200);
+        } catch (Exception $th) {
+            return response()->json(['mensaje' => $th->getMessage()], 400);
+        }
+        // error_log($usuarios);
+    }
+
+    public function enviarMensaje(Request $request)
+    {
+        try {
+            Mensaje::create([
+                'email_origen' => $request->email_origen,
+                'email_destino' => $request->email_destino,
+                'texto' => $request->texto,
+                'leido' => 0,
+            ]);
+            // error_log('eee');
+            return response()->json(['mensaje' => 'Mensaje enviado.'], 200);
         } catch (Exception $th) {
             return response()->json(['mensaje' => $th->getMessage()], 400);
         }
